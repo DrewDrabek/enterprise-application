@@ -21,17 +21,17 @@ Format: (Fill in the square brackets with your own words)
 - **I want** [Feature]  
 - **So that I can** [Do something]
 
-As an Employee
-I want to be able to create tickets
-So that I can better manage work tasks as they are assigned
+- As an Employee
+- I want to be able to create tickets
+- So that I can better manage work tasks as they are assigned
 
-As a Managed
-I want to be able to view current active tickets
-So that I can see the current status on current projects
+- As a Manager
+- I want to be able to view current active tickets
+- So that I can see the current status on current projects
 
-As an Employee
-I want to be able to change the current status of a ticket
-So that I can track the currents status of a ticket
+- As an Employee
+- I want to be able to change the current status of a ticket
+- So that I can track the currents status of a ticket
 
 
 ### Examples:
