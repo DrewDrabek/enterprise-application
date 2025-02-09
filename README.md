@@ -1,12 +1,15 @@
-# enterprise-application
+# Tickey System Application
 This repository is used to manage and store the code that is used with the enterpised application. It will be named and the description will be changed once a topic picked.
-
-# Project Ideas
-
 
 # Project Design Document
 
 ## Introduction
+
+The application that we are going to make is a ticket managing system. This will allow for users to create tickets for current items that need to be worked on. Users will then be able to update the status of those tickets. Users will be able to mark tickets complete as well so that they no longer show on refresh.
+
+Possible Addons:
+- Ability to add comments to tickets
+- Ability to see historical tickets
 
 ## Storyboard  
 Screen mockups can be created using tools such as Invision, FluidUI, PowerPoint, Paint, etc.
@@ -16,7 +19,20 @@ Format: (Fill in the square brackets with your own words)
 
 - **As a** [User]  
 - **I want** [Feature]  
-- **So that I can** [Do something]  
+- **So that I can** [Do something]
+
+As an Employee
+I want to be able to create tickets
+So that I can better manage work tasks as they are assigned
+
+As a Managed
+I want to be able to view current active tickets
+So that I can see the current status on current projects
+
+As an Employee
+I want to be able to change the current status of a ticket
+So that I can track the currents status of a ticket
+
 
 ### Examples:
 
@@ -43,7 +59,9 @@ Your project should have a REST endpoint that emits JSON, which another group ca
 - That's all you need at this point.
 
 ## Scrum Roles  
-- List the scrum roles and who will fill them.
+Emmanuella - UI Specialist
+Aidan - Business Logic and Persistence Specialist
+Product Owner/Devops  - Andrew
 
 ## GitHub Project Link  
 [Insert GitHub project link here]
@@ -65,8 +83,8 @@ A **scrum or kanban board**, using GitHub Projects or similar, should contain:
 - Milestones for **Milestone #2 and #3** should be defined but do not need projects or tasks yet.
 
 ## Stand-up Meeting Link  
-[Insert link to Teams or other meeting tool]  
 
-- If you choose a different tool/time, indicate it in the document.
-- If the repo is public and you prefer not to put the Teams link there, email it to the group instead.
-- Still, list the **date and time** of the weekly meeting(s).
+- Weekly Meeting on Teams at 6pm EST
+  
+(https://teams.microsoft.com/l/meetup-join/19%3ameeting_YTUzN2U0ODEtZGI0Yi00NjdkLWI4YjctNDJlYzlkNzExYjk2%40thread.v2/0?context=%7b%22Tid%22%3a%22f5222e6c-5fc6-48eb-8f03-73db18203b63%22%2c%22Oid%22%3a%22e39bc5e0-3862-4cd4-927f-5c21c1da9bcf%22%7d)
+
