@@ -116,9 +116,57 @@ Format: (Fill in the square brackets with your own words)
 ## JSON Schema  
 Your project should have a REST endpoint that emits JSON, which another group can consume. The design document should contain a draft JSON schema for this endpoint.
 
-- You can create a schema from a Java class at [QuickType.io](https://quicktype.io/).
-- This Java class is typically a DTO.
-- That's all you need at this point.
+- Schema
+- {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "status": { "type": "string" }
+    },
+    "required": ["id", "name", "price", "stockQuantity"]
+}
+- Draft Class
+-     private String description;
+    private long id;
+    private String name;
+    private double price;
+    private String status;
+    private Object stockQuantity;
+
+    @JsonProperty("description")
+    public String getDescription() { return description; }
+    @JsonProperty("description")
+    public void setDescription(String value) { this.description = value; }
+
+    @JsonProperty("id")
+    public long getID() { return id; }
+    @JsonProperty("id")
+    public void setID(long value) { this.id = value; }
+
+    @JsonProperty("name")
+    public String getName() { return name; }
+    @JsonProperty("name")
+    public void setName(String value) { this.name = value; }
+
+    @JsonProperty("price")
+    public double getPrice() { return price; }
+    @JsonProperty("price")
+    public void setPrice(double value) { this.price = value; }
+
+    @JsonProperty("status")
+    public String getStatus() { return status; }
+    @JsonProperty("status")
+    public void setStatus(String value) { this.status = value; }
+
+    @JsonProperty("stockQuantity")
+    public Object getStockQuantity() { return stockQuantity; }
+    @JsonProperty("stockQuantity")
+    public void setStockQuantity(Object value) { this.stockQuantity = value; }
+}
 
 ## Scrum Roles  
 Emmanuella - UI Specialist
