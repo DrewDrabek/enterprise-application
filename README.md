@@ -60,9 +60,9 @@ Format: (Fill in the square brackets with your own words)
 
     Given a manager is logged into the system
 
-    When the manager navigates to the "Active Tickets" page
+    When the manager navigates to the "Tickets" page
 
-    Then a list of all currently open tickets is displayed, showing relevant information such as ticket ID, title, priority, assigned employee (if applicable), and current status.
+    Then a list of all currently open tickets is displayed, showing relevant information such as ticket ID, title, priority, and current status.
 
     Given a manager is logged into the system and there are no active tickets.
 
@@ -72,7 +72,7 @@ Format: (Fill in the square brackets with your own words)
 
     Given a manager is logged into the system and there are several active tickets with varying priorities.
 
-    When the manager navigates to the "Active Tickets" page and sorts the tickets by priority (e.g., highest to lowest)
+    When the manager navigates to the "Tickets" page and sorts the tickets by priority (e.g., highest to lowest)
 
     Then the tickets are displayed in the selected order of priority.
 
@@ -95,12 +95,6 @@ Format: (Fill in the square brackets with your own words)
     When the employee changes the status of the ticket to "Resolved"
 
     Then the ticket status is updated to "Resolved", and it no longer appears on the active tickets list by default.
-
-    Given an employee is logged in and attempts to change the status of a ticket that is not assigned to them.
-
-    When the employee views the ticket details and attempts to change the status.
-
-    Then an error message is displayed, indicating that the employee does not have permission to change the status of that particular ticket.
 
     Given an employee is logged in and the current status of the ticket is "Blocked"
 
@@ -132,7 +126,7 @@ Aidan - Business Logic and Persistence Specialist
 Product Owner/Devops  - Andrew
 
 ## GitHub Project Link  
-[Insert GitHub project link here]
+[[Project link]](https://github.com/users/DrewDrabek/projects/3)
 
 ## Scrum/Kanban Board  
 A **scrum or kanban board**, using GitHub Projects or similar, should contain:
