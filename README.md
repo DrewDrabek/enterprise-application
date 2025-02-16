@@ -120,10 +120,24 @@ Your project should have a REST endpoint that emits JSON, which another group ca
 - This Java class is typically a DTO.
 - That's all you need at this point.
 
+- {
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "properties": {
+        "id": { "type": "integer" },
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "price": { "type": "number" },
+        "status": { "type": "string" }
+    },
+    "required": ["id", "name", "price", "status"]
+}
+
 ## Scrum Roles  
 Emmanuella - UI Specialist
 Aidan - Business Logic and Persistence Specialist
 Product Owner/Devops  - Andrew
+Persitance Owner - Paul
 
 ## GitHub Project Link  
 [[Project link]](https://github.com/users/DrewDrabek/projects/3)
