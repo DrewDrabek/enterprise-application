@@ -109,11 +109,6 @@ Format: (Fill in the square brackets with your own words)
 
     Then the ticket status is updated to "In Progress".
 
-**Notes:**
-- You should have a few (2-4) requirements.
-- The Given/When/Then syntax will form the basis of our unit tests.
-- Consider different cases: good data, bad data, multiple sets of data, etc.
-
 ## Class Diagram  
 
 ![uml class diagram](/assets/image.png)
@@ -156,15 +151,8 @@ Andrew - Product Owner/Devops
 [[Project link]](https://github.com/users/DrewDrabek/projects/3)
 
 ## Scrum/Kanban Board  
-A **scrum or kanban board**, using GitHub Projects or similar, should contain:
 
-- **Milestone #1** with associated tasks.
-- **Projects for Milestone #1.**
-- **Tasked Stories for Milestone #1**, including:
-  - Sprint tasks that elaborate on the stories, with technical details.
-  - These should be technical tasks required to implement one of the features.
-  - Only task out stories for **Sprint #1**.  
-  - Sprints #2 and #3 can be defined as we get closer.
+- This can be viewed on the project
 
 ### Sprint Planning
 
