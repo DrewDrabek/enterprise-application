@@ -22,7 +22,7 @@ Possible Addons:
 ![Storyboard](/assets/Storyboard.png)
 
 ## Functional Requirements  
-Format: (Fill in the square brackets with your own words)
+
 
 - **As a** [As an Employee]  
 - **I want** [I want to be able to create tickets]  
@@ -121,11 +121,6 @@ Ticket: Creates and keeps track of information on a ticket
 Comment: Stores information about comments added onto a ticket and allows modification of comments.
 
 ## JSON Schema  
-Your project should have a REST endpoint that emits JSON, which another group can consume. The design document should contain a draft JSON schema for this endpoint.
-
-- You can create a schema from a Java class at [QuickType.io](https://quicktype.io/).
-- This Java class is typically a DTO.
-- That's all you need at this point.
 
 - {
     "$schema": "http://json-schema.org/draft-07/schema#",
