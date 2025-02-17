@@ -12,7 +12,7 @@ Possible Addons:
 - Ability to see historical tickets
 
 ## Storyboard  
-Screen mockups can be created using tools such as Invision, FluidUI, PowerPoint, Paint, etc.
+![Storyboard](/assets/Storyboard.png)
 
 ## Functional Requirements  
 Format: (Fill in the square brackets with your own words)
@@ -108,10 +108,15 @@ Format: (Fill in the square brackets with your own words)
 - Consider different cases: good data, bad data, multiple sets of data, etc.
 
 ## Class Diagram  
-- UML-based class diagram.
-- **Class Diagram Description:** One or two lines for each class to describe the use of interfaces, classes, and resources.  
-  - Don't worry about putting more than a few words per class.
-  - This does not need to be thorough.
+
+![uml class diagram](/assets/image.png)
+
+
+Descriptions:
+
+User: Handles login/logout functions and stores a user identity and role in the system
+Ticket: Creates and keeps track of information on a ticket 
+Comment: Stores information about comments added onto a ticket and allows modification of comments.
 
 ## JSON Schema  
 Your project should have a REST endpoint that emits JSON, which another group can consume. The design document should contain a draft JSON schema for this endpoint.
@@ -136,8 +141,9 @@ Your project should have a REST endpoint that emits JSON, which another group ca
 ## Scrum Roles  
 Emmanuella - UI Specialist
 Aidan - Business Logic and Persistence Specialist
-Product Owner/Devops  - Andrew
-Persitance Owner - Paul
+Paul - Business Logic and Persistence Specialist
+Andrew - Product Owner/Devops
+
 
 ## GitHub Project Link  
 [[Project link]](https://github.com/users/DrewDrabek/projects/3)
