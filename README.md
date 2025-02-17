@@ -3,6 +3,13 @@ This repository is used to manage and store the code that is used with the enter
 
 # Project Design Document
 
+### Group Memebers
+
+Andrew Drabek
+Emmanuella Asamoah
+Paul Connolly
+Aidan Place
+
 ## Introduction
 
 The application that we are going to make is a ticket managing system. This will allow for users to create tickets for current items that need to be worked on. Users will then be able to update the status of those tickets. Users will be able to mark tickets complete as well so that they no longer show on refresh.
