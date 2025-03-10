@@ -1,30 +1,61 @@
-package enterprise.uc.ticketingsystem.model;
+package com.uc.ticketingsystem.model;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import javax.validation.constraints.NotNull;
+
+@Entity // Marks this class as a JPA entity (a persistent object)
+@Table(name = "tickets") // Specifies the database table name and if you do not do this then JPA will infer based on the class name but better to call it here
 public class Ticket {
 
-    private Long id;             // Unique identifier for the ticket
-    private String title;        // Title of the ticket
-    private String description;  // Detailed description of the issue
-    private String status;       // Current status (e.g., "Open", "In Progress", "Resolved")
-    private String priority;     // Priority level (e.g., "High", "Medium", "Low")
-    // Add any other relevant fields like:
-    // private User assignedTo;    // Employee assigned to the ticket
-    // private Date createdAt;     // Date and time the ticket was created
+    @Id // Marks this field as the primary key
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementing ID
+    private Long id;
 
-    // Constructor(s)
-    public Ticket() {
-        // Default constructor
+    @NotBlank(message = "Title is mandatory") // Validation: This means that the title cannot be null or empty
+    @Size(max = 255, message = "Title cannot exceed 255 characters") // Validation: Limits title length
+    @Column(nullable = false)
+    private String title;
+
+    @Size(max = 1000, message = "Description cannot exceed 1000 characters") //Validation: Limits description size
+    @Column(length = 1000) // Database constraint: Sets maximum length for description
+    private String description;
+
+    @NotNull(message = "Priority is mandatory") // Validation: Priority cannot be null
+    @Enumerated(EnumType.STRING) // Store the enum as a string in the database and we are using an enum here because we are going to have specific options and want additional validation
+    private Priority priority;
+
+    @NotNull(message = "Status is mandatory") // Validation: Status cannot be null
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    @Column(name = "created_at", nullable = false, updatable = false) // Audit field
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "creator_user_id") // Clearer column name
+    private User creatorUser; //  Field name changed
+
+    // Enums
+    public enum Priority {
+        LOW, MEDIUM, HIGH
     }
 
-    public Ticket(String title, String description, String priority) {
-        this.title = title;
-        this.description = description;
-        this.priority = priority;
-        this.status = "Open"; // Default status when a ticket is created
+    public enum Status {
+        OPEN, IN_PROGRESS, BLOCKED, RESOLVED, CLOSED
     }
 
-    // Getters and Setters
-    public Long getId() {
+    // Lifecycle Callbacks
+    @PrePersist  // This method is called before the object is saved in the database
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
+
+    // These are the getters and setters
+
+    public Long getId() { // this is long retun type and it returns the ID for the entity and this seems to be standard practice
         return id;
     }
 
@@ -48,21 +79,38 @@ public class Ticket {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
-    public String getPriority() {
+    public Priority getPriority() {
         return priority;
     }
 
-    public void setPriority(String priority) {
+    public void setPriority(Priority priority) {
         this.priority = priority;
     }
 
-    // Additional methods if we need them
+    public Status getStatus() {
+        return status;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User getCreatorUser() {
+        return creatorUser;
+    }
+
+    public void setCreatorUser(User creatorUser) {
+        this.creatorUser = creatorUser;
+    }
+
+    // The only other thing that I can think of here that we might need is to add some sort of way to assign a ticket to a user at the object level but I do not know right now - will come back to this after I make the model for the users
+
 }
