@@ -1,3 +1,3 @@
 # Notes
 
-Contains the interfaces and their implementations that define the business logic
+This is going to be the interfaces for the services. This is going to hold the method and signature requirements for the business logic.
