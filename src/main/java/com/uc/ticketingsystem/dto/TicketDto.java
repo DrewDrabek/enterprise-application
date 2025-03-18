@@ -1,0 +1,80 @@
+package com.uc.ticketingsystem.dto;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+// This is the simplest item for the DTO
+
+public class TicketDto {
+
+    private Long id;
+
+    @NotBlank(message = "Title is mandatory")
+    @Size(max = 255, message = "Title cannot exceed 255 characters")
+    private String title;
+
+    @Size(max = 1000, message = "Description cannot exceed 1000 characters")
+    private String description;
+
+    @NotBlank(message = "Priority is mandatory")
+    private String priority;
+
+    @NotBlank(message = "Status is mandatory")
+    private String status;
+
+    private String creatorUserId;
+
+
+    // Getters and Setters - we must have these
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public void setPriority(String priority) {
+        this.priority = priority;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getCreatorUserId() {
+        return creatorUserId;
+    }
+
+    public void setCreatorUserId(String creatorUserId) {
+        this.creatorUserId = creatorUserId;
+    }
+}
+
+
+// THis is my first go at this - we also should not need the user dto since there we are going to use the third party auth
