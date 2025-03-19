@@ -1,17 +1,12 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.4.3'
-    id 'io.spring.dependency-management' version '1.1.7'
+    id 'org.springframework.boot' version '3.2.4' // Use a supported Spring Boot version
+    id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.example'
+group = 'com.uc' // Correct group ID
 version = '0.0.1-SNAPSHOT'
-
-java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
-}
+sourceCompatibility = '17'
 
 repositories {
     mavenCentral()
@@ -19,8 +14,14 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // MUST HAVE
+    implementation 'org.springframework.boot:spring-boot-starter-validation' // MUST HAVE for @Valid
+    runtimeOnly 'com.mysql:mysql-connector-j' // MySQL driver -  MUST HAVE (when you uncomment JPA annotations)
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    // Add these if you decide to use Swagger/OpenAPI for API documentation:
+    implementation 'io.springfox:springfox-boot-starter:3.0.0'
+    implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 }
 
 tasks.named('test') {

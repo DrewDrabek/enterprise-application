@@ -2,7 +2,8 @@ package com.uc.ticketingsystem.repository;
 
 import com.uc.ticketingsystem.model.Ticket;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Procedure;
+import org.springframework.data.jpa.repository.*;
+import org.springframework.data.jpa.repository.query.Procedure;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import java.util.Optional; // Import Optional
@@ -11,7 +12,7 @@ import java.util.List;
 
 // this is a format for the repository item this will need to be changed
 
-@Repository
+//@Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
 
     @Procedure(procedureName = "CreateTicket")

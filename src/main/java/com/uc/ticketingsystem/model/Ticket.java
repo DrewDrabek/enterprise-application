@@ -1,10 +1,14 @@
 package com.uc.ticketingsystem.model;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
+
+
 import java.time.LocalDateTime;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
-import javax.validation.constraints.NotNull;
+
 
 @Entity // Marks this class as a JPA entity (a persistent object)
 @Table(name = "tickets") // Specifies the database table name and if you do not do this then JPA will infer based on the class name but better to call it here

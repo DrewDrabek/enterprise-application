@@ -1,9 +1,10 @@
 package com.uc.ticketingsystem.dto;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 
 // This is the simplest item for the DTO
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 
 public class TicketDto {
 

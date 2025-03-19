@@ -1,6 +1,4 @@
-package enterprise.uc.ticketingsystem.service;
-
-import enterprise.uc.ticketingsystem.model.Ticket;
+package com.uc.ticketingsystem.service;
 
 import com.uc.ticketingsystem.dto.TicketDto;
 
