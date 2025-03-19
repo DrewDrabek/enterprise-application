@@ -2,6 +2,8 @@ package enterprise.uc.ticketingsystem.service;
 
 import enterprise.uc.ticketingsystem.model.Ticket;
 
+import com.uc.ticketingsystem.dto.TicketDto;
+
 import java.util.List;
 
 public interface TicketService {
