@@ -1,0 +1,44 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ticketing System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div class="login-container">
+        <h2>Ticketing System</h2>
+        <input type="text" placeholder="Username" id="username">
+        <input type="password" placeholder="Password" id="password">
+        <button onclick="login()">Login</button>
+        <a href="#">Forgot Password?</a>
+    </div>
+
+    <!-- Ticket Dashboard -->
+    <div class="dashboard hidden" id="dashboard">
+        <h2>Ticket Overview</h2>
+        <button onclick="showCreateTicket()">New Ticket</button>
+        <div id="ticketList"></div>
+    </div>
+
+    <!-- Ticket Details -->
+    <div class="ticket-details hidden" id="ticketDetails">
+        <h2>Ticket Details</h2>
+        <p id="ticketDescription"></p>
+        <button onclick="closeTicket()">Close Ticket</button>
+        <button onclick="updateTicket()">Update</button>
+    </div>
+
+    <!-- Create New Ticket -->
+    <div class="new-ticket hidden" id="newTicket">
+        <h2>New Ticket Creation</h2>
+        <input type="text" placeholder="Issue Title" id="issueTitle">
+        <textarea placeholder="Description" id="issueDescription"></textarea>
+        <button onclick="submitTicket()">Create</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
