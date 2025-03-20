@@ -18,7 +18,7 @@ public class MockTicketServiceImpl implements TicketService {
                 createMockTicket(3L, "Software Installation", "Need to install new software.", "MEDIUM", "OPEN")
         ));
 
-        private TicketDto createMockTicket(Long id, String title, String description, String priority, String status){
+        private TicketDto createMockTicket(Long id, String title, String description, String priority, String status) {
                 TicketDto ticketDto = new TicketDto();
                 ticketDto.setId(id);
                 ticketDto.setTitle(title);
@@ -65,7 +65,7 @@ public class MockTicketServiceImpl implements TicketService {
         @Override
         public TicketDto updateTicket(Long id, TicketDto ticketDto) {
                 TicketDto existing = getTicketById(id);
-                if(existing != null) {
+                if (existing != null) {
                         existing.setTitle(ticketDto.getTitle());
                         existing.setDescription(ticketDto.getDescription());
                         existing.setStatus(ticketDto.getStatus());
