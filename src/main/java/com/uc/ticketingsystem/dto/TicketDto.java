@@ -1,14 +1,13 @@
 package com.uc.ticketingsystem.dto;
 
-// This is the simplest item for the DTO
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
+// This is my first go at this - we also should not need the user dto since there we are going to use the third party auth
+
 @Data
 public class TicketDto {
-
     private Long id;
 
     @NotBlank(message = "Title is mandatory")
@@ -26,6 +25,3 @@ public class TicketDto {
 
     private String creatorUserId;
 }
-
-
-// THis is my first go at this - we also should not need the user dto since there we are going to use the third party auth

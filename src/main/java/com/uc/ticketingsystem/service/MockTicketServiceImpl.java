@@ -1,20 +1,17 @@
 package com.uc.ticketingsystem.service;
 
 import com.uc.ticketingsystem.dto.TicketDto;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Service;
 import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-
-//NOTES THIS IS TEMPORARY THIS IS NOT SOMETHING THAT I AM GOING TO USER LONG TERM IT IS JUST THERE SO THAT I CAN FIX THE MOCK TESTING
+// NOTES THIS IS TEMPORARY THIS IS NOT SOMETHING THAT I AM GOING TO USER LONG TERM IT IS JUST THERE SO THAT I CAN FIX THE MOCK TESTING
 
 @Service
 @Profile("mock") // this tell spring to only create this bean when the mock profile is active
 public class MockTicketServiceImpl implements TicketService {
-
         private List<TicketDto> mockTickets = new ArrayList<>(List.of(
                 createMockTicket(1L, "Printer Issue", "The printer is jammed.", "HIGH", "OPEN"),
                 createMockTicket(2L, "Network Down", "Can't access the internet.", "HIGH", "IN_PROGRESS"),
@@ -28,7 +25,7 @@ public class MockTicketServiceImpl implements TicketService {
                 ticketDto.setDescription(description);
                 ticketDto.setPriority(priority);
                 ticketDto.setStatus(status);
-                ticketDto.setCreatorUserId("Mock-User-ID"); //For consistancy
+                ticketDto.setCreatorUserId("Mock-User-ID"); // For consistency
                 return ticketDto;
         }
 
@@ -68,7 +65,7 @@ public class MockTicketServiceImpl implements TicketService {
         @Override
         public TicketDto updateTicket(Long id, TicketDto ticketDto) {
                 TicketDto existing = getTicketById(id);
-                if(existing != null){
+                if(existing != null) {
                         existing.setTitle(ticketDto.getTitle());
                         existing.setDescription(ticketDto.getDescription());
                         existing.setStatus(ticketDto.getStatus());

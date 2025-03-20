@@ -4,18 +4,16 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration;
-//this exclusion might help with the problem that I am having
+
+// this exclusion might help with the problem that I am having
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class, HibernateJpaAutoConfiguration.class})
 public class TicketingSystemApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(TicketingSystemApplication.class, args);
     }
-
 }
 
 /*
-
 was able to get the mock data to work and here is what the get all response looks like
 
 [
@@ -45,6 +43,5 @@ was able to get the mock data to work and here is what the get all response look
     }
 ]
 
-
-I will work backwords on some of the other items today as well
- */
+I will work backwards on some of the other items today as well
+*/

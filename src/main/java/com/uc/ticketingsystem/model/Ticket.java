@@ -1,19 +1,15 @@
 package com.uc.ticketingsystem.model;
 
 import jakarta.persistence.*;
-
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import jakarta.validation.constraints.*;
-
 
 import java.time.LocalDateTime;
-
 
 @Entity // Marks this class as a JPA entity (a persistent object)
 @Table(name = "tickets") // Specifies the database table name and if you do not do this then JPA will infer based on the class name but better to call it here
 public class Ticket {
-
     @Id // Marks this field as the primary key
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Auto-incrementing ID
     private Long id;
@@ -58,7 +54,6 @@ public class Ticket {
     }
 
     // These are the getters and setters
-
     public Long getId() { // this is long retun type and it returns the ID for the entity and this seems to be standard practice
         return id;
     }
@@ -116,5 +111,4 @@ public class Ticket {
     }
 
     // The only other thing that I can think of here that we might need is to add some sort of way to assign a ticket to a user at the object level but I do not know right now - will come back to this after I make the model for the users
-
 }

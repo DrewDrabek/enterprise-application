@@ -6,7 +6,6 @@ import java.util.List;
 
 public interface TicketService {
         // the idea here is these are the contracts that define what can be done but now how they are done
-
         // The idea is you define what return type there will be and then the function signature (name and what it takes it)
 
         /**

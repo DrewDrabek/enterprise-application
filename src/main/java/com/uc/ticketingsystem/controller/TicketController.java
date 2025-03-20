@@ -1,23 +1,20 @@
 package com.uc.ticketingsystem.controller;
 
 import com.uc.ticketingsystem.dto.TicketDto;
-import com.uc.ticketingsystem.service.TicketService; // Import the interface
+import com.uc.ticketingsystem.service.TicketService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired; // Import @Autowired
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-
 import java.util.List;
-
 
 // This is for the temp mock controllers I need to fix this tomorrow but this is what we are going to do while I finish up the backend and it is what we should have done in the beginning - this will allow for someone to run the applicaiton and get responses with out the db connection
 
 @RestController
 @RequestMapping("/api/tickets")
 public class TicketController {
-
     @Autowired
     private TicketService ticketService;
 
