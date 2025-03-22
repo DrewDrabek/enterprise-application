@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `ticketingsystem` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ticketingsystem`;
+CREATE DATABASE  IF NOT EXISTS `TicketingSystem` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `TicketingSystem`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: localhost    Database: ticketingsystem
+-- Host: localhost    Database: TicketingSystem
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -21,10 +21,10 @@ USE `ticketingsystem`;
 -- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
+DROP TABLE IF EXISTS `Users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `users` (
+CREATE TABLE `Users` (
   `UserID` int NOT NULL AUTO_INCREMENT,
   `FirstName` varchar(50) NOT NULL,
   `LastName` varchar(50) NOT NULL,
@@ -37,13 +37,13 @@ CREATE TABLE `users` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `users`
+-- Dumping data for table `Users`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'John','Doe','john.doe@email.com','hashedpassword123','Customer'),(2,'Jane','Doe','jane.doe@email.com','hashedpassword123','Admin'),(3,'craig','smith','smithcraig@email.com','hashedpassword123','Support Agent');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+LOCK TABLES `Ssers` WRITE;
+/*!40000 ALTER TABLE `Ssers` DISABLE KEYS */;
+INSERT INTO `Users` VALUES (1,'John','Doe','john.doe@email.com','hashedpassword123','Customer'),(2,'Jane','Doe','jane.doe@email.com','hashedpassword123','Admin'),(3,'craig','smith','smithcraig@email.com','hashedpassword123','Support Agent');
+/*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

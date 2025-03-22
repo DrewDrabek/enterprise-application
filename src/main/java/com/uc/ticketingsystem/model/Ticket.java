@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 
 
 @Entity // Marks this class as a JPA entity (a persistent object)
-@Table(name = "tickets") // Specifies the database table name and if you do not do this then JPA will infer based on the class name but better to call it here
+@Table(name = "Tickets") // Specifies the database table name and if you do not do this then JPA will infer based on the class name but better to call it here
 public class Ticket {
 
     @Id // Marks this field as the primary key

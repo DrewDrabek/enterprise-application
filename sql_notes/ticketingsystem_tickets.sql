@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `ticketingsystem` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ticketingsystem`;
+CREATE DATABASE  IF NOT EXISTS `TicketingSystem` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `TicketingSystem`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: localhost    Database: ticketingsystem
+-- Host: localhost    Database: TicketingSystem
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -18,13 +18,13 @@ USE `ticketingsystem`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `tickets`
+-- Table structure for table `Tickets`
 --
 
-DROP TABLE IF EXISTS `tickets`;
+DROP TABLE IF EXISTS `Tickets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `tickets` (
+CREATE TABLE `Tickets` (
   `TicketID` int NOT NULL AUTO_INCREMENT,
   `Title` varchar(255) NOT NULL,
   `Description` text NOT NULL,
@@ -35,18 +35,18 @@ CREATE TABLE `tickets` (
   PRIMARY KEY (`TicketID`),
   KEY `CreatedBy` (`CreatedBy`),
   KEY `AssignedTo` (`AssignedTo`),
-  CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`CreatedBy`) REFERENCES `users` (`UserID`),
-  CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`AssignedTo`) REFERENCES `users` (`UserID`)
+  CONSTRAINT `Tickets_ibfk_1` FOREIGN KEY (`CreatedBy`) REFERENCES `Users` (`UserID`),
+  CONSTRAINT `Tickets_ibfk_2` FOREIGN KEY (`AssignedTo`) REFERENCES `Users` (`UserID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `tickets`
+-- Dumping data for table `Tickets`
 --
 
-LOCK TABLES `tickets` WRITE;
-/*!40000 ALTER TABLE `tickets` DISABLE KEYS */;
-/*!40000 ALTER TABLE `tickets` ENABLE KEYS */;
+LOCK TABLES `Tickets` WRITE;
+/*!40000 ALTER TABLE `Tickets` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Tickets` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `ticketingsystem` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
-USE `ticketingsystem`;
+CREATE DATABASE  IF NOT EXISTS `TicketingSystem` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `TicketingSystem`;
 -- MySQL dump 10.13  Distrib 8.0.41, for Win64 (x86_64)
 --
--- Host: localhost    Database: ticketingsystem
+-- Host: localhost    Database: TicketingSystem
 -- ------------------------------------------------------
 -- Server version	8.0.41
 
@@ -18,13 +18,13 @@ USE `ticketingsystem`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `ticketcomments`
+-- Table structure for table `TicketComments`
 --
 
-DROP TABLE IF EXISTS `ticketcomments`;
+DROP TABLE IF EXISTS `TicketComments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ticketcomments` (
+CREATE TABLE `TicketComments` (
   `CommentID` int NOT NULL AUTO_INCREMENT,
   `TicketID` int NOT NULL,
   `UserID` int NOT NULL,
@@ -32,18 +32,18 @@ CREATE TABLE `ticketcomments` (
   PRIMARY KEY (`CommentID`),
   KEY `TicketID` (`TicketID`),
   KEY `UserID` (`UserID`),
-  CONSTRAINT `ticketcomments_ibfk_1` FOREIGN KEY (`TicketID`) REFERENCES `tickets` (`TicketID`) ON DELETE CASCADE,
-  CONSTRAINT `ticketcomments_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE
+  CONSTRAINT `TicketComments_ibfk_1` FOREIGN KEY (`TicketID`) REFERENCES `Tickets` (`TicketID`) ON DELETE CASCADE,
+  CONSTRAINT `TicketComments_ibfk_2` FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ticketcomments`
+-- Dumping data for table `TicketComments`
 --
 
-LOCK TABLES `ticketcomments` WRITE;
-/*!40000 ALTER TABLE `ticketcomments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `ticketcomments` ENABLE KEYS */;
+LOCK TABLES `TicketComments` WRITE;
+/*!40000 ALTER TABLE `TicketComments` DISABLE KEYS */;
+/*!40000 ALTER TABLE `TicketComments` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
