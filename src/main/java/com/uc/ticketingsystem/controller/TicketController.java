@@ -23,8 +23,7 @@ public class TicketController {
 
     @PostMapping
     public ResponseEntity<TicketDto> createTicket(@Valid @RequestBody TicketDto ticketDto, @RequestHeader("Authorization") String authHeader) {
-        String externalUserId = "mock-user-id"; // Get from authHeader in real implementation
-        TicketDto savedTicketDto = ticketService.createTicket(ticketDto, externalUserId); // Use the service
+        TicketDto savedTicketDto = ticketService.createTicket(ticketDto, authHeader); // Use the service
         return new ResponseEntity<>(savedTicketDto, HttpStatus.CREATED);
     }
 
