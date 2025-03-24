@@ -31,7 +31,7 @@ public class Ticket {
     @Enumerated(EnumType.STRING) // Store the enum as a string in the database and we are using an enum here because we are going to have specific options and want additional validation
     private Priority priority;
 
-    @NotNull(message = "Status is mandatory") // Validation: Status cannot be null
+    @NotNull(message = "Status is mandatory")
     @Enumerated(EnumType.STRING)
     private Status status;
 
