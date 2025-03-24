@@ -32,9 +32,15 @@ public class MockTicketServiceImpl implements TicketService {
                 return ticketDto;
         }
 
+        /**
+         * Create a new ticket
+         * @param ticketDto The data for the new ticket
+         * @param externalUserId The ID of the user creating the ticket
+         * @return The created ticket
+         */
         @Override
         public TicketDto createTicket(TicketDto ticketDto, String externalUserId) {
-                // Simulate creating a new ticket (assign a new ID)
+
                 long newId = mockTickets.size() + 1;
                 ticketDto.setId(newId);
                 ticketDto.setCreatorUserId(externalUserId);
