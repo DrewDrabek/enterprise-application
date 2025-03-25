@@ -13,6 +13,7 @@ import java.util.List;
 
 @Service
 @Profile("mock") // this tell spring to only create this bean when the mock profile is active
+@Primary
 public class MockTicketServiceImpl implements TicketService {
 
         private List<TicketDto> mockTickets = new ArrayList<>(List.of(

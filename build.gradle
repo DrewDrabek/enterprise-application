@@ -1,10 +1,10 @@
 plugins {
     id 'java'
-    id 'org.springframework.boot' version '3.2.4' // Use a supported Spring Boot version
+    id 'org.springframework.boot' version '3.2.4'
     id 'io.spring.dependency-management' version '1.1.4'
 }
 
-group = 'com.uc' // Correct group ID
+group = 'com.uc'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '17'
 
@@ -14,12 +14,11 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.boot:spring-boot-starter-data-jpa' // MUST HAVE
-    implementation 'org.springframework.boot:spring-boot-starter-validation' // MUST HAVE for @Valid
-    runtimeOnly 'com.mysql:mysql-connector-j' // MySQL driver -  MUST HAVE (when you uncomment JPA annotations)
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'com.h2database:h2' // Add this line for H2
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-    // Add these if you decide to use Swagger/OpenAPI for API documentation:
     implementation 'io.springfox:springfox-boot-starter:3.0.0'
     implementation 'io.springfox:springfox-swagger-ui:3.0.0'
 }
