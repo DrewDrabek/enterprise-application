@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket List</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px; border: 1px solid #ccc; text-align: left; }
+    input[type="text"] { width: 300px; padding: 8px; }
+    .search-form { margin-bottom: 20px; }
+  </style>
+</head>
+<body>
+
+<h1>Tickets</h1>
+
+<form class="search-form" method="get" th:action="@{/tickets}">
+  <label>
+    <input type="text" name="keyword" placeholder="Search by title or description" th:value="${keyword}" />
+  </label>
+  <button type="submit">Search</button>
+</form>
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="ticket : ${tickets}">
+    <td th:text="${ticket.id}">1</td>
+    <td th:text="${ticket.title}">Sample Title</td>
+    <td th:text="${ticket.description}">Sample Description</td>
+  </tr>
+  <tr th:if="${#lists.isEmpty(tickets)}">
+    <td colspan="3">No tickets found.</td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
