@@ -1,18 +1,13 @@
 package com.uc.ticketingsystem.controller;
 
 import com.uc.ticketingsystem.dto.TicketDto;
-import com.uc.ticketingsystem.service.TicketService; // Import the interface
+import com.uc.ticketingsystem.service.TicketService;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired; // Import @Autowired
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-
 import java.util.List;
-
-
-// This is for the temp mock controllers I need to fix this tomorrow but this is what we are going to do while I finish up the backend and it is what we should have done in the beginning - this will allow for someone to run the applicaiton and get responses with out the db connection
 
 @RestController
 @RequestMapping("/api/tickets")
@@ -23,14 +18,14 @@ public class TicketController {
 
     @PostMapping
     public ResponseEntity<TicketDto> createTicket(@Valid @RequestBody TicketDto ticketDto, @RequestHeader("Authorization") String authHeader) {
-        String externalUserId = "mock-user-id"; // Get from authHeader in real implementation
-        TicketDto savedTicketDto = ticketService.createTicket(ticketDto, externalUserId); // Use the service
+        String externalUserId = "mock-user-id"; // In a real application, extract from authHeader
+        TicketDto savedTicketDto = ticketService.createTicket(ticketDto, externalUserId);
         return new ResponseEntity<>(savedTicketDto, HttpStatus.CREATED);
     }
 
     @GetMapping
     public ResponseEntity<List<TicketDto>> getAllTickets() {
-        return new ResponseEntity<>(ticketService.getAllTickets(), HttpStatus.OK); // Use the service
+        return new ResponseEntity<>(ticketService.getAllTickets(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

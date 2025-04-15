@@ -1,8 +1,5 @@
 package com.uc.ticketingsystem.dto;
 
-
-// This is the simplest item for the DTO
-
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
@@ -24,9 +21,6 @@ public class TicketDto {
     private String status;
 
     private String creatorUserId;
-
-
-    // Getters and Setters - we must have these
 
     public Long getId() {
         return id;
@@ -76,6 +70,3 @@ public class TicketDto {
         this.creatorUserId = creatorUserId;
     }
 }
-
-
-// THis is my first go at this - we also should not need the user dto since there we are going to use the third party auth
