@@ -1,12 +1,23 @@
 package com.uc.ticketingsystem.repository;
 
 import com.uc.ticketingsystem.model.Ticket;
+import com.uc.ticketingsystem.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long> {
-    // Spring Data JPA provides implementations for save, findAll, findById, deleteById, etc.
-    // You can add custom query methods here if needed, for example:
-    // List<Ticket> findByPriority(Ticket.Priority priority);
+
+
+    List<Ticket> findByStatusNot(Ticket.Status status);
+
+
+    List<Ticket> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndStatusNot(
+            String titleKeyword,
+            String descriptionKeyword,
+            Ticket.Status excludedStatus
+    );
+
 }

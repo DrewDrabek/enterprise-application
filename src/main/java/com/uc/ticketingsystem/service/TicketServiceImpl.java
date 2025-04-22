@@ -7,6 +7,8 @@ import com.uc.ticketingsystem.repository.TicketRepository;
 import com.uc.ticketingsystem.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -19,6 +21,8 @@ public class TicketServiceImpl implements TicketService {
 
     @Autowired
     private UserRepository userRepository;
+
+    // createTicket method remains the same
 
     @Override
     public TicketDto createTicket(TicketDto ticketDto, String externalUserId) {
@@ -33,22 +37,26 @@ public class TicketServiceImpl implements TicketService {
         ticket.setTitle(ticketDto.getTitle());
         ticket.setDescription(ticketDto.getDescription());
         ticket.setPriority(Ticket.Priority.valueOf(ticketDto.getPriority().toUpperCase()));
-        ticket.setStatus(Ticket.Status.valueOf(ticketDto.getStatus().toUpperCase()));
+        // Default new tickets to OPEN, or let DTO decide if needed
+        ticket.setStatus(Ticket.Status.OPEN);
         ticket.setCreatorUser(creator);
 
         Ticket savedTicket = ticketRepository.save(ticket);
         return convertToDto(savedTicket);
     }
 
+
     @Override
     public List<TicketDto> getAllTickets() {
-        return ticketRepository.findAll().stream()
+        List<Ticket> tickets = ticketRepository.findByStatusNot(Ticket.Status.CLOSED);
+        return tickets.stream()
                 .map(this::convertToDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public TicketDto getTicketById(Long id) {
+        // (This method remains the same - no filtering by status here)
         Optional<Ticket> ticketOptional = ticketRepository.findById(id);
         return ticketOptional.map(this::convertToDto).orElse(null);
     }
@@ -73,9 +81,14 @@ public class TicketServiceImpl implements TicketService {
         Optional<Ticket> existingTicketOptional = ticketRepository.findById(id);
         if (existingTicketOptional.isPresent()) {
             Ticket existingTicket = existingTicketOptional.get();
-            existingTicket.setStatus(Ticket.Status.valueOf(status.toUpperCase()));
-            Ticket updatedTicket = ticketRepository.save(existingTicket);
-            return convertToDto(updatedTicket);
+            try {
+                existingTicket.setStatus(Ticket.Status.valueOf(status.toUpperCase()));
+                Ticket updatedTicket = ticketRepository.save(existingTicket);
+                return convertToDto(updatedTicket);
+            } catch (IllegalArgumentException e) {
+                System.err.println("Invalid status value provided: " + status);
+                return null;
+            }
         }
         return null;
     }
@@ -83,6 +96,27 @@ public class TicketServiceImpl implements TicketService {
     @Override
     public void deleteTicket(Long id) {
         ticketRepository.deleteById(id);
+    }
+
+    @Override
+    public List<TicketDto> searchTickets(String keyword) {
+        List<Ticket> tickets;
+        if (keyword == null || keyword.trim().isEmpty()) {
+            // If no keyword, return all non-closed tickets
+            tickets = ticketRepository.findByStatusNot(Ticket.Status.CLOSED);
+        } else {
+            // Use the new repository method to search title/description and exclude CLOSED
+            String searchKeyword = keyword.trim();
+            tickets = ticketRepository.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCaseAndStatusNot(
+                    searchKeyword,
+                    searchKeyword,
+                    Ticket.Status.CLOSED
+            );
+        }
+        // Map results to DTOs
+        return tickets.stream()
+                .map(this::convertToDto)
+                .collect(Collectors.toList());
     }
 
     private TicketDto convertToDto(Ticket ticket) {
@@ -95,6 +129,7 @@ public class TicketServiceImpl implements TicketService {
         if (ticket.getCreatorUser() != null) {
             dto.setCreatorUserId(ticket.getCreatorUser().getExternalUserId());
         }
+
         return dto;
     }
 }

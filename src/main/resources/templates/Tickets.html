@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Ticket List</title>
+  <style>
+    /* General Styles */
+    body { font-family: Arial, sans-serif; margin: 20px; background-color: #f4f7f6; }
+    h1 { color: #333; }
+
+    /* Button Styles */
+    button, input[type="submit"] { /* Consistent button styling */
+      background-color: #007bff; color: white; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 14px; transition: background-color 0.2s ease;
+    }
+    button:hover, input[type="submit"]:hover { background-color: #0056b3; }
+    button:disabled { background-color: #cccccc; cursor: not-allowed; }
+    #createNewTicketBtn { margin-bottom: 15px; }
+
+    /* Search Form Styles */
+    .search-form { margin-bottom: 20px; display: flex; align-items: center; background-color: #fff; padding: 15px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    .search-form input[type="text"] { width: 300px; padding: 8px; margin-right: 10px; border: 1px solid #ccc; border-radius: 4px; }
+
+    /* Table Styles */
+    table { width: 100%; border-collapse: collapse; margin-top: 15px; background-color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+    th, td { padding: 12px; border: 1px solid #ddd; text-align: left; vertical-align: middle; }
+    th { background-color: #e9ecef; color: #495057; font-weight: bold; }
+    tbody tr:nth-child(even) { background-color: #f8f9fa; }
+    tbody tr:hover { background-color: #e2e6ea; }
+
+    /* Action Buttons in Table */
+    .actions button { margin-right: 5px; padding: 4px 8px; font-size: 13px; }
+    .actions button.editBtn { background-color: #ffc107; color: #333; }
+    .actions button.editBtn:hover { background-color: #e0a800; }
+    /* Add styles for delete button if you implement it */
+    /* .actions button.deleteBtn { background-color: #dc3545; } */
+    /* .actions button.deleteBtn:hover { background-color: #c82333; } */
+
+    /* Modal Styles */
+    .modal { display: none; position: fixed; z-index: 100; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.5); }
+    .modal-backdrop { display: none; position: fixed; z-index: 99; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.5); }
+    .modal-content { background-color: #fefefe; margin: 10% auto; padding: 25px 30px; border: 1px solid #888; width: 90%; max-width: 550px; position: relative; z-index: 101; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+    .close-btn { color: #aaa; float: right; font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1; }
+    .close-btn:hover, .close-btn:focus { color: black; text-decoration: none; cursor: pointer; }
+    #ticketForm div { margin-bottom: 15px; }
+    #ticketForm label { display: block; margin-bottom: 6px; font-weight: bold; color: #555; }
+    #ticketForm input[type="text"], #ticketForm textarea, #ticketForm select {
+      width: calc(100% - 18px); /* Adjust width considering padding */
+      padding: 9px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    #ticketForm textarea { height: 80px; resize: vertical; }
+    #ticketForm button[type="submit"] { margin-right: 10px; }
+    #ticketForm button[type="button"] { background-color: #6c757d; }
+    #ticketForm button[type="button"]:hover { background-color: #5a6268; }
+
+    /* Snackbar Styles */
+    #snackbar {
+      visibility: hidden;
+      min-width: 280px;
+      margin-left: -140px;
+      background-color: #333;
+      color: #fff;
+      text-align: center;
+      border-radius: 4px;
+      padding: 16px;
+      position: fixed;
+      z-index: 105; /* Ensure it's above modal backdrop */
+      left: 50%;
+      bottom: 30px;
+      opacity: 0;
+      transition: opacity 0.5s, bottom 0.5s, visibility 0.5s;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+    #snackbar.show {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Tickets</h1>
+
+<div style="margin-bottom: 20px;">
+  <button id="createNewTicketBtn">Create New Ticket</button>
+</div>
+
+<form class="search-form" method="get" th:action="@{/tickets}">
+  <label>
+    <input type="text" name="keyword" placeholder="Search by title or description" th:value="${keyword}" />
+  </label>
+  <button type="submit">Search</button>
+</form>
+
+
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Title</th>
+    <th>Description</th>
+    <th>Priority</th>
+    <th>Status</th>
+    <th>Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="ticket : ${tickets}">
+    <td th:text="${ticket.id}">1</td>
+    <td th:text="${ticket.title}">Sample Title</td>
+    <td th:text="${ticket.description}" style="max-width: 300px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" th:title="${ticket.description}">Sample Description</td> <td th:text="${ticket.priority}">MEDIUM</td>
+    <td th:text="${ticket.status}">OPEN</td> <td class="actions">
+    <button class="editBtn" th:attr="data-ticket-id=${ticket.id}">Edit</button>
+  </td>
+  </tr>
+  <tr th:if="${#lists.isEmpty(tickets)}">
+    <td colspan="6" style="text-align: center; padding: 20px;">No tickets found.</td> </tr>
+  </tbody>
+</table>
+
+
+<div id="ticketModal" class="modal">
+  <div class="modal-content">
+    <span class="close-btn" onclick="closeModal()">&times;</span>
+    <h2 id="modalTitle">Ticket Details</h2>
+    <form id="ticketForm">
+      <input type="hidden" id="ticketId">
+
+      <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+      </div>
+      <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description"></textarea>
+      </div>
+      <div>
+        <label for="priority">Priority:</label>
+        <select id="priority" name="priority" required>
+          <option value="LOW">LOW</option>
+          <option value="MEDIUM">MEDIUM</option>
+          <option value="HIGH">HIGH</option>
+        </select>
+      </div>
+      <div>
+        <label for="status">Status:</label>
+        <select id="status" name="status" required>
+          <option value="OPEN">OPEN</option>
+          <option value="IN_PROGRESS">IN_PROGRESS</option>
+          <option value="BLOCKED">BLOCKED</option>
+          <option value="RESOLVED">RESOLVED</option>
+          <option value="CLOSED">CLOSED</option>
+        </select>
+      </div>
+
+      <button type="submit">Save Ticket</button>
+      <button type="button" onclick="closeModal()">Cancel</button>
+      <div id="modalError" style="color: #dc3545; margin-top: 15px; font-weight: bold;"></div>
+    </form>
+  </div>
+</div>
+<div id="modalBackdrop" class="modal-backdrop" onclick="closeModal()"></div> <div id="snackbar"></div>
+
+
+<script>
+  // --- DOM Elements ---
+  const createBtn = document.getElementById('createNewTicketBtn');
+  const ticketTableBody = document.querySelector('table tbody');
+  const modal = document.getElementById('ticketModal');
+  const modalBackdrop = document.getElementById('modalBackdrop');
+  const modalTitle = document.getElementById('modalTitle');
+  const ticketForm = document.getElementById('ticketForm');
+  const ticketIdInput = document.getElementById('ticketId');
+  const titleInput = document.getElementById('title');
+  const descriptionInput = document.getElementById('description');
+  const prioritySelect = document.getElementById('priority');
+  const statusSelect = document.getElementById('status');
+  const modalError = document.getElementById('modalError');
+  const snackbar = document.getElementById('snackbar');
+  let snackbarTimeout; // To manage the timeout
+
+  // --- API Base URL ---
+  const API_BASE_URL = '/api/tickets'; // Your REST API base path
+
+  // --- Modal Functions ---
+  function openModal(mode, currentTicketData = null) {
+    modalError.textContent = '';
+    ticketForm.reset();
+    ticketIdInput.value = '';
+
+    if (mode === 'create') {
+      modalTitle.textContent = 'Create New Ticket';
+      statusSelect.value = 'OPEN'; // Default status
+      prioritySelect.value = 'MEDIUM'; // Default priority
+    } else if (mode === 'edit' && currentTicketData) {
+      modalTitle.textContent = 'Edit Ticket';
+      ticketIdInput.value = currentTicketData.id;
+      titleInput.value = currentTicketData.title;
+      descriptionInput.value = currentTicketData.description;
+      prioritySelect.value = currentTicketData.priority;
+      statusSelect.value = currentTicketData.status;
+    }
+
+    modal.style.display = 'block';
+    modalBackdrop.style.display = 'block';
+    titleInput.focus(); // Focus on first field
+  }
+
+  function closeModal() {
+    modal.style.display = 'none';
+    modalBackdrop.style.display = 'none';
+  }
+
+  // --- Snackbar Function ---
+  function showSnackbar(message) {
+    if (!snackbar) return;
+
+    snackbar.textContent = message;
+    snackbar.classList.add('show'); // Make it visible via CSS
+
+    clearTimeout(snackbarTimeout); // Clear previous timeout if any
+
+    snackbarTimeout = setTimeout(() => {
+      snackbar.classList.remove('show'); // Hide snackbar after delay
+    }, 3000); // Hide after 3 seconds
+  }
+
+
+  // --- Event Listeners ---
+
+  // Listener for "Create New Ticket" button
+  if (createBtn) {
+    createBtn.addEventListener('click', () => {
+      openModal('create');
+    });
+  }
+
+  // Listener for "Edit" buttons (using event delegation on table body)
+  if (ticketTableBody) {
+    ticketTableBody.addEventListener('click', async (event) => {
+      if (event.target.classList.contains('editBtn')) {
+        const button = event.target;
+        const ticketId = button.dataset.ticketId;
+        if (!ticketId) return;
+        console.log(`Edit button clicked for ticket ID: ${ticketId}`);
+        try {
+          button.disabled = true;
+          button.textContent = 'Loading...';
+          const response = await fetch(`${API_BASE_URL}/${ticketId}`);
+          if (!response.ok) {
+            let errorMsg = `Error ${response.status}: ${response.statusText}`;
+            try { const errorBody = await response.json(); errorMsg = errorBody.message || errorBody.error || JSON.stringify(errorBody); } catch(e) {}
+            throw new Error(`Failed to fetch ticket: ${errorMsg}`);
+          }
+          const ticketData = await response.json();
+          console.log('Fetched ticket data:', ticketData);
+          openModal('edit', ticketData);
+        } catch (error) {
+          console.error('Error fetching ticket for edit:', error);
+          alert(`Error fetching ticket details: ${error.message}`); // Fallback alert
+        } finally {
+          button.disabled = false;
+          button.textContent = 'Edit';
+        }
+      }
+      // Add logic for delete button here if needed
+      /*
+      else if (event.target.classList.contains('deleteBtn')) {
+           const button = event.target;
+           const ticketId = button.dataset.ticketId;
+           // Add delete confirmation and fetch logic here
+      }
+      */
+    });
+  }
+
+
+  // Listener for Form Submission (Create or Edit)
+  if (ticketForm) {
+    ticketForm.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      modalError.textContent = '';
+
+      const isEditMode = !!ticketIdInput.value;
+      const ticketId = ticketIdInput.value;
+
+      const ticketData = {
+        title: titleInput.value.trim(),
+        description: descriptionInput.value.trim(),
+        priority: prioritySelect.value,
+        status: statusSelect.value
+      };
+
+      if (!ticketData.title) {
+        modalError.textContent = 'Title is required.';
+        return;
+      }
+
+      const url = isEditMode ? `${API_BASE_URL}/${ticketId}` : API_BASE_URL;
+      const method = isEditMode ? 'PUT' : 'POST';
+      console.log(`Submitting to ${url} with method ${method}`, ticketData);
+
+      const submitButton = ticketForm.querySelector('button[type="submit"]');
+
+      try {
+        submitButton.disabled = true;
+        submitButton.textContent = 'Saving...';
+
+        const response = await fetch(url, {
+          method: method,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer mock-token' // Remember mock token for API
+          },
+          body: JSON.stringify(ticketData)
+        });
+
+        if (!response.ok) {
+          let errorMsg = `Error ${response.status}: ${response.statusText}`;
+          try { const errorBody = await response.json(); errorMsg = errorBody.message || errorBody.error || JSON.stringify(errorBody); } catch(e) {}
+          throw new Error(errorMsg);
+        }
+
+        // --- SUCCESS LOGIC with SNACKBAR ---
+        closeModal(); // Close the modal
+
+        const message = isEditMode ? 'Ticket updated successfully!' : 'Ticket created successfully!';
+        showSnackbar(message); // Show confirmation
+
+        // Refresh page shortly after to show changes
+        setTimeout(() => {
+          location.reload();
+        }, 700); // Short delay after snackbar appears
+        // --- End SUCCESS LOGIC ---
+
+      } catch (error) {
+        console.error(`Error ${isEditMode ? 'updating' : 'creating'} ticket:`, error);
+        modalError.textContent = `Failed to save ticket: ${error.message}`;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Save Ticket';
+      }
+    });
+  }
+
+  // Close modal if backdrop is clicked
+  if(modalBackdrop) {
+    modalBackdrop.addEventListener('click', closeModal);
+  }
+  // Close modal if Escape key is pressed
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && modal.style.display === 'block') {
+      closeModal();
+    }
+  });
+
+</script>
+
+</body>
+</html>
