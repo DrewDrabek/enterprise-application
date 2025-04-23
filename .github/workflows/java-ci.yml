@@ -1,0 +1,44 @@
+# This workflow name will appear in the GitHub Actions tab
+name: Java CI with Gradle
+
+# This specifies when the workflow should run
+on:
+  # Trigger the workflow on every push to any branch
+  push:
+    branches: [ "main", "develop" ] # You can adjust branches here
+  # Allow manual triggering of the workflow from the Actions tab
+  workflow_dispatch:
+
+# Define the jobs that will run as part of this workflow
+jobs:
+  build:
+    # The type of machine to run the job on
+    runs-on: ubuntu-latest # Using the latest Ubuntu Linux environment
+
+    # The steps that the job will execute
+    steps:
+      - name: Checkout code
+        # Uses the actions/checkout@v4 action to download your repository code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        # Uses the actions/setup-java@v4 action to set up the Java environment
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17' # Specify the Java version your project uses
+          distribution: 'temurin' # Recommended distribution (OpenJ9, Adoptium, etc.)
+          # cache: 'gradle' # Optional: caches Gradle dependencies to speed up builds
+
+      - name: Grant execute permission for gradlew
+        # Make the Gradle wrapper script executable
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        # Execute the Gradle 'build' task. This typically includes compiling code,
+        # running tests, and packaging the application.
+        run: ./gradlew build
+
+    # If you only want to run tests and not the full build, you could replace
+    # the 'Build with Gradle' step with this one:
+    # - name: Run Tests with Gradle
+    #   run: ./gradlew test
