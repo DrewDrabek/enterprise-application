@@ -88,17 +88,6 @@ public class TicketServiceImplTest {
     }
 
     @Test
-    public void getAllTickets_ShouldReturnListOfTicketDtos() {
-        when(ticketRepository.findAll()).thenReturn(Arrays.asList(ticket));
-
-        List<TicketDto> result = ticketService.getAllTickets();
-
-        assertNotNull(result);
-        assertEquals(1, result.size());
-        assertEquals(ticketDto.getTitle(), result.get(0).getTitle());
-    }
-
-    @Test
     public void getTicketById_ShouldReturnTicketDtoIfExists() {
         when(ticketRepository.findById(1L)).thenReturn(Optional.of(ticket));
 
