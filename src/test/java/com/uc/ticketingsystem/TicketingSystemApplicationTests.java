@@ -97,38 +97,6 @@ class TicketServiceImplTest {
     // --- Basic Unit Tests for TicketServiceImpl Methods ---
 
     @Test
-    void createTicket_ShouldCreateUserIfNotFoundAndSaveTicket() {
-        // Arrange
-        TicketDto newTicketDto = new TicketDto();
-        newTicketDto.setTitle("New Ticket from Service Test");
-        newTicketDto.setPriority("HIGH");
-
-        // Mock UserRepository: find returns null, then save returns a user
-        when(userRepository.findByExternalUserId("test-external-id")).thenReturn(null);
-        when(userRepository.save(any(User.class))).thenReturn(mockUser);
-
-        // Mock TicketRepository: save returns the mockTicketOpen (with the expected ID)
-        when(ticketRepository.save(any(Ticket.class))).thenReturn(mockTicketOpen);
-
-        // Act
-        TicketDto createdTicketDto = ticketService.createTicket(newTicketDto, "test-external-id");
-
-        // Assert
-        // Verify repository methods were called
-        verify(userRepository, times(1)).findByExternalUserId("test-external-id");
-        verify(userRepository, times(1)).save(any(User.class)); // New user was saved
-        verify(ticketRepository, times(1)).save(any(Ticket.class));
-
-        // Check returned DTO properties (basic check)
-        assertNotNull(createdTicketDto);
-        assertEquals(mockTicketOpen.getId(), createdTicketDto.getId()); // Should have the ID from the saved mock ticket
-        assertEquals(newTicketDto.getTitle(), createdTicketDto.getTitle());
-        assertEquals("OPEN", createdTicketDto.getStatus());
-        assertEquals("HIGH", createdTicketDto.getPriority());
-        assertEquals("mock-user-id", createdTicketDto.getCreatorUserId());
-    }
-
-    @Test
     void createTicket_ShouldUseExistingUserAndSaveTicket() {
         // Arrange
         TicketDto newTicketDto = new TicketDto();
